@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Array</h1>
+    <h2>Syntax</h2>
+    <h2>Get</h2>
+    <h3 id="data">data</h3>
+    <h2>Count</h2>
+    <h3 id="count">data</h3>
+    <h2>Add</h2>
+    <h3 id="addData">data</h3>
+    <h2>Count</h2>
+    <h3 id="addCount">data</h3>
+    <script>
+      var vData = ["first", "second"];
+      document.getElementById("data").innerHTML = vData[0] + ',' + vData[1];
+      document.getElementById("count").innerHTML = vData.length;
+      vData.push('three');
+      vData.push('four');
+      document.getElementById("addData").innerHTML = vData.join(", ")
+      document.getElementById("addCount").innerHTML = vData.length;
+    </script>
+    <h1>Loop</h1>
+    <ul>
+      <script>
+        for(var i=1;i<=4;i++){
+          document.write('<li>' + i + '</li>');
+        }
+      </script>
+    </ul>
+  </body>
+</html>

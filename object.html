@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="js/object.js"></script>
+  </head>
+  <body>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+      var coworkers = {
+        "programmer" : "Jeong Jean Woo",
+        "designer" : "Nam tae Weon"
+      };
+      document.write("programmer : " + coworkers.programmer + "<br>");
+      document.write("designer : " + coworkers.designer + "<br>");
+    </script>
+    <h2>Add</h2>
+    <script>
+      coworkers.bookkeeper = "Naui";
+      document.write("bookkeeper : " + coworkers.bookkeeper + "<br>");
+      coworkers["data scientist"] = "Woojoo";
+      document.write("bookkeeper : " + coworkers["data scientist"] + "<br>");
+    </script>
+    <h2>Iterate</h2>
+    <script>
+      for(var key in coworkers) {
+          document.write("coworkers." + key + " : " + coworkers[key] + "<br>");
+      }
+    </script>
+    <h2>Property & Method</h2>
+    <script>
+      /*
+        function showAll()
+      */
+      coworkers.showAll = function() {
+        for(var key in this) {
+            document.write("this." + key + " : " + this[key] + "<br>");
+        }
+      }
+      coworkers.showAll();
+    </script>
+    <h2>In With</h2>
+    <script>
+      //document.write('coworkers' in bookkeeper); error
+      //document.write('bookkeeper' in bookkeeper); error
+      document.write('bookkeeper' in coworkers);
+      document.write('<br>');
+      with(coworkers) {
+        document.write('bookkeeper : ' + bookkeeper);
+        document.write('<br>');
+      }
+      var bookkeeper = 'master';
+      var master = 'JW Jeong';
+      document.write('coworkers bookkeeper : ' + coworkers.bookkeeper);
+      document.write('<br>');
+      document.write('window bookkeeper : ' + window.bookkeeper);
+      document.write('<br>');
+      document.write('master : ' + master);
+      document.write('<br>');
+    </script>
+    <h2>Dynamic Attribute</h2>
+    <script>
+      coworkers.writer = 'JJW';
+      document.write('coworkers writer : ' + coworkers.writer);
+      document.write('<br>');
+      coworkers.writer = null;
+      document.write('coworkers writer : ' + coworkers.writer);
+      document.write('<br>');
+      delete(coworkers.writer);
+      document.write('coworkers writer : ' + coworkers.writer);
+      document.write('<br>');
+    </script>
+    <h2>Object function</h2>
+    <script>
+      function makeStudent(name, lang, area) {
+        var retStudent = {
+          name : name,
+          lang : lang,
+          area : area,
+          toString : function() {
+            return this.name + '\t' + this.lang + '\t' + this.area;
+          }
+        };
+        return retStudent;
+      }
+      var student = makeStudent('김민우', '한글', '한국');
+      document.write(student);
+      document.write('<br>');
+
+      function MakeStudent(name, lang, area) {
+          this.name = name;
+          this.lang = lang;
+          this.area = area;
+          this.toString = function() {
+            return this.name + '\t' + this.lang + '\t' + this.area;
+          };
+      };
+      var student2 = new MakeStudent('김민우2', '한글', '한국');
+      //alert(student2);
+      document.write(student2);
+      document.write('<br>');
+    </script>
+    <h2>Object prototype</h2>
+    <script>
+      function MyUser(user, id) {
+        this.user = user;
+        this.id = id;
+        //this.toString = function() {
+        //  return this.user + '\t' + this.id;
+        //};
+      };
+
+      MyUser.prototype.getSum = function() {
+        return this.user + '+' + this. id;
+      };
+      MyUser.prototype.toString = function() {
+        return this.user + ' ' + this. id;
+      };
+
+      var myUsers = [];
+      myUsers.push(new MyUser('홍길동', '번쩍'));
+      myUsers.push(new MyUser('이순신', '죽사'));
+      myUsers.push(new MyUser('이세종', '한글'));
+      //alert(myUsers);
+      for(var idx in myUsers) {
+        document.write(myUsers[idx]);
+        document.write(myUsers[idx] instanceof MyUser);
+        document.write(myUsers[idx] instanceof MakeStudent);
+        document.write('<br>');
+        //alert(myUsers[idx]);
+      }
+    </script>
+    <h2>Object Encapsulation and inheritance</h2>
+    <script>
+      function Rectangle(w, h) {
+          if(w <= 0 || h <= 0) {
+              throw '길이는 양수이어야 합니다.';
+          }
+          var width = w;
+          var height = h;
+
+          this.getWidth = function() {
+              return width;
+          };
+          this.getHeight = function() {
+              return height;
+          };
+          this.setWidth = function(val) {
+              if(val <= 0) {
+                  throw '길이는 양수이어야 합니다.';
+              }
+              else {
+                  width = val;
+              }
+          };
+          this.setHeight = function(val) {
+              if(val <= 0) {
+                  throw '길이는 양수이어야 합니다.';
+              }
+              else {
+                  height = val;
+              }
+          };
+      }
+
+      Rectangle.prototype.getArea = function() {
+          return this.getWidth() * this.getHeight();
+      };
+      Rectangle.prototype.toString = function() {
+        return this.getWidth() + ' ' + this.getHeight();
+      };
+
+      // Square는 Rectangle을 상속받습니다.
+      function Square(length) {
+          this.base = Rectangle;
+          this.base(length, length);
+      }
+      // prototype도 상속받을 수 있도록 별도 작업이 필요합니다.
+      Square.prototype = Rectangle.prototype;
+      var square = new Square(5);         // Square의 인스턴스 생성
+      //alert(square instanceof Rectangle); // 상속 확인(true 출력)
+      document.write(square instanceof Rectangle);
+      document.write('<br>');
+      document.write('square : width-' + square.getWidth() + ', height-' + square.getHeight() + ', area-' + square.getArea());
+      document.write('<br>');
+      document.write(square);
+      document.write('<br>');
+
+      function Square2(length) {
+          Rectangle.call(this, length, length);
+      }
+      Square2.prototype = Rectangle.prototype;//new Rectangle();
+      //Square2.prototype.constructor = Square2;
+      var square2 = new Square2(5);         // Square의 인스턴스 생성
+      //alert(square2 instanceof Rectangle); // 상속 확인(true 출력)
+      document.write(square2 instanceof Rectangle);
+      document.write('<br>');
+      document.write('square2 : width-' + square2.getWidth() + ', height-' + square2.getHeight() + ', area-' + square2.getArea());
+      document.write('<br>');
+      document.write(square2);
+    </script>
+</html>

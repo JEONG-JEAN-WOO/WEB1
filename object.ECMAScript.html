@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="js/object.js"></script>
+  </head>
+  <body>
+    <h1>Object</h1>
+    <h2>Add Property</h2>
+    <script>
+      var obj = {};
+      Object.defineProperty(obj, 'name', {
+          value: 'ECMAScript',
+          writable: false,
+          configurable: false,
+          enumerable: false
+      });
+      document.write("obj value : 속성값 <br>");
+      document.write("obj writable : 속성 값을 변경할 수 있는지의 여부(true/false)<br>");
+      document.write("obj configurable : 속성의 옵션값을 변경할 수 있는지의 여부(true/false)<br>");
+      document.write("obj enumerable : fon in 반복문으로 검사할 수 있는지의 여부(true/false)<br>");
+      document.write("obj get: 게터 함수. value 옵션과 함께 사용할 수 없습니다.<br>");
+      document.write("obj set: 세터 함수. value 옵션과 함께 사용할 수 없습니다.<br>");
+      document.write('<br>');
+
+      var obj2 = {};
+      Object.defineProperty(obj2, 'name', {
+          // value 옵션을 함께 사용할 수 없습니다!
+          get: function() {
+              return value;
+          },
+          set: function(newValue) {
+              value = newValue;
+          }
+      });
+
+      obj2.name = 'ECMAScript';    // set 호출
+      document.write('obj2.name : ' + obj2.name);  // get 호출
+      document.write('<br>');
+
+      var obj3 = {};
+      Object.defineProperties(obj3, {
+          name: {
+              value: 'ECMAScript'
+          },
+          type: {
+              value: 'Programming Language'
+          }
+      });
+
+      document.write('obj3.name : ' + obj3.name);  // get 호출
+      document.write('<br>');
+      document.write('obj3.type : ' + obj3.type);  // get 호출
+      document.write('<br>');
+    </script>
+    <h2>object Create(inheritance)</h2>
+    <script>
+      document.write('Object.create(객체명, { 속성명: {옵션} } ) : 첫 번째 매개 변수로 받은 객체에 두 번째 매개 변수로 받은 속성을 추가하여 새로운 객체를 리턴합니다. 이 때 두 번째 매개 변수는 Object.defineProperties와 문법이 같습니다.<br>');
+      // 첫 번째 매개변수에 빈 객체를 전달 함으로써
+      // 완전히 새로운 객체를 만드는 효과를 볼 수 있습니다.
+      var people = Object.create({}, {
+          name: { value: 'Kim', enumerable: true }
+      });
+
+      // 이번에는 people을 기반으로 새로운 객체를 생성합니다.(상속)
+      var man = Object.create(people, {
+          gender: { value: 'Male', enumerable: true }
+      });
+
+      document.write('people.name : ' + people.name + '<br>');
+      document.write('man.name : ' + man.name + '<br>');
+      document.write('man.gender : ' + man.gender + '<br>');
+      document.write('<br>');
+    </script>
+</html>

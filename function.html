@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="js/function.js"></script>
+  </head>
+  <body>
+    <h1>Functions</h1>
+    <h2>Basic></h2>
+    <script>
+      document.write('<li>1</li>')
+      two(2);
+      document.write('<li>3</li>')
+      two(4);
+    </script>
+    <h2>Parameter & Argument</h2>
+    <script>
+      sum1(2, 3);
+      sum1(4, 5);
+    </script>
+    <h2>Return</h2>
+    <script>
+      var i = 2;
+      var j = 3;
+      var k = 1;
+      // sum(2, 3) + 1
+      var sum1 = sum(i, j) + k;
+      document.write('<li>sum('+i+'+'+j+')+'+k+'=' + sum1 + '</li>');
+      document.write('<li><span style="color:red">sum('+i+'+'+j+')+'+k+'=' + sum1 + '</span></li>');
+      document.write('<li><span style="font-size:3rem;">sum('+i+'+'+j+')+'+k+'=' + sum1 + '</span></li>');
+      i = 4; j = 5;
+      // sum(4, 5)
+      var sum2 = sum(4, 5);
+      document.write('<li>sum('+i+'+'+j+')=' + sum2 + '</li>');
+      document.write('<li><span style="color:red">sum('+i+'+'+j+')=' + sum2 + '</span></li>');
+      document.write('<li><span style="font-size:3rem;">sum('+i+'+'+j+')=' + sum2 + '</span></li>');
+    </script>
+  </body>
+</html>

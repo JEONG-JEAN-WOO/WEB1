@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <h1>Comparison operators & Boolean</h1>
+    <div class="grid">
+      <div class="nav">
+        <h2>===</h2>
+        <h3>1===1</h3>
+        <script>
+          document.write(1===1);
+        </script>
+        <h3>1===2</h3>
+        <script>
+          document.write(1===2);
+        </script>
+        <h3>1==='1'</h3>
+        <script>
+          document.write(1==='1');
+        </script>
+        <h3>1&lt;2</h3>
+        <script>
+          document.write(1<2);
+        </script>
+        <h3>1&lt;1</h3>
+        <script>
+          document.write(1<1);
+        </script>
+      </div>
+      <div class="nav">
+        <h2>Program</h2>
+        <input id="chkChoice" type="checkbox" value="unchecked" onchange="OnChecked('chkChoice')">Choice</input>
+        <h3>list</h3>
+        <script>
+          document.write("1<br>");
+          document.write("2<br>");
+          document.write("3<br>");
+          document.write("4<br>");
+        </script>
+        <h3>boolean</h3>
+        <div id = "data"></div>
+        <script>
+          OnDisplay();
+          function OnDisplay() {
+            var inHtml = "1<br>";
+            //alert(document.getElementById("chkChoice").value);
+            if (document.getElementById("chkChoice").checked == true) {
+              inHtml += "2<br>";
+            }
+            else {
+              inHtml += "3<br>";
+              document.getElementById("chkChoice").checked = false;
+            }
+            inHtml += "4<br>";
+
+            document.getElementById("data").innerHTML = inHtml;
+          }
+          function OnChecked(chkChoice)
+          {
+            OnDisplay();
+          }
+        </script>
+      </div>
+    </div>
+    <div class="end"></div>
+  </body>
+</html>
